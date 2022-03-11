@@ -1,2 +1,2 @@
 # tim-burr.github.io
- Timbur. Projects, Tips, & Tricks.
+ Timbur. Projects, Tips & Tricks.
