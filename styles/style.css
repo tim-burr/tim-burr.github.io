@@ -1,0 +1,127 @@
+/* Global styles */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100vw; /* Ignore scrollbar */
+    height: 100vh; /* Ignore scrollbar */
+    font-size: 1rem;
+}
+
+header, main, footer {
+    width: 100%;
+    height: auto;
+}
+
+header, main {
+    background-color: #FFF;
+}
+
+header {
+    z-index: 100;
+    top: 0;
+    position: sticky; /* Only works if top is defined */
+    flex: 0 0 auto; /* No shrink */
+    text-transform: uppercase;
+    font-size: 140%;
+}
+
+header .menu-container {
+    overflow: hidden;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+main {
+    z-index: 50;
+    flex: 1 0 auto; /* Grow to fill page */
+    align-items: flex-start;
+    font-size: 85%;
+}
+
+footer {
+    flex: 0 0 auto; /* No shrink */
+    background-color: #245;
+    color: #ccc;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 80%;
+    padding: 1em;
+}
+
+h1 {
+    text-transform: uppercase;
+}
+
+img {
+    height: auto;
+}
+
+#maintenance-main {
+    z-index: 1;
+    height: 100%;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    letter-spacing: normal;
+}
+
+#maintenance-main h1 {
+    margin: 0;
+    text-transform: uppercase;
+}
+
+#maintenance-icon {
+    max-width: 12vw;
+}
+
+/*
+Media queries must appear at end of CSS to overwrite defaults
+*/
+
+@media only screen and (orientation: landscape) {
+    /* Shrink to avoid mobile screen notch. */
+    header, main {
+        padding-left: 2.5vw;
+        padding-right: 2.5vw;
+    }
+}
+
+@media only screen and (orientation: portrait) {
+    /* Match landscape padding for rotation consistency */
+    header, main {
+        padding-left: 2.5vw;
+        padding-right: 2.5vw;
+    }
+}
+
+/* Tablets */
+@media (max-width: 48em) {
+    body {
+        font-size: 2vw !important; /* Scale text with window size */
+    }
+    .menu-container {
+        justify-content: center !important;
+    }
+}
+
+/* Mobile */
+@media (max-width: 30em) {
+    body {
+        font-size: 3vw !important; /* Force menu wrap */
+    }
+    .heading {
+        font-size: 110% !important;
+        letter-spacing: 0.1em !important;
+    }
+    .menu-container {
+        flex-flow: row wrap !important;
+    }
+}

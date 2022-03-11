@@ -1,0 +1,15 @@
+main {
+    height: 100%;
+    background-color: #245;
+    padding: 30vh;
+}
+
+#error {
+    text-align: center;
+    letter-spacing: normal;
+    color: #ccc;
+}
+
+a {
+    color: #ccc;
+}
