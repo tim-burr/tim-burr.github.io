@@ -5,6 +5,21 @@
     box-sizing: border-box;
 }
 
+@supports(padding: max(0px)) {
+    header, footer {
+        padding-left: min(0vmin, env(safe-area-inset-left));
+        padding-right: min(0vmin, env(safe-area-inset-right));
+    }
+}
+
+@media only screen and (orientation: portrait) {
+    main { width: 95%; }
+}
+
+@media only screen and (orientation: landscape) {
+    main { width: 90%; }    /* Shrink a little more to avoid the notch. */
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -22,24 +37,25 @@ header, main {
 }
 
 header {
+    z-index: 100;
     position: sticky;
     top: 0;
-    overflow: hidden;
     flex-shrink: 0;
     text-transform: uppercase;
     font-size: 1.4em;
 }
 
-header .nav-menu {
-    z-index: 100;
+header .menu-container {
+    overflow: hidden;
     justify-content: space-between;
 }
 
-.nav-menu {
+.menu-container {
     display: flex;
 }
 
 main {
+    z-index: 50;
     flex: 1 0 auto;
     line-height: 1;
 }
@@ -58,7 +74,11 @@ div {
     display: block;
 }
 
-.maintenance-main {
+h1 {
+    text-transform: uppercase;
+}
+
+#maintenance-main {
     z-index: 1;
     height: 100%;
     flex-direction: column;

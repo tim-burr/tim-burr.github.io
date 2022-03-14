@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Timbur. Projects & Tips.</title>
     <!-- #todo: Add link to license(s). -->
     <!-- #todo: Add favicon. -->
@@ -17,19 +17,20 @@
 
 <body>
     <header>    <!-- #todo: Move header to global HTML file. -->
-        <nav class="nav-menu pure-menu pure-menu-horizontal">
+        <nav class="menu-container pure-menu pure-menu-horizontal" id="nav-menu">
             <a class="pure-menu-heading" href="index.html">Tim Burroughs</a>
-            <ul class="pure-menu-list"> <!-- #todo: Dynamically apply selected menu style. -->
-                <li class="pure-menu-item pure-menu-selected"><a href="index.html" class="pure-menu-link">About</a></li>
-                <li class="pure-menu-item"><a href="projects.html" class="pure-menu-link">Projects</a></li>
-                <li class="pure-menu-item"><a href="articles.html" class="pure-menu-link">Articles</a></li>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item pure-menu-selected"><a href="index.html" class="pure-menu-link" role="menuitem">About</a></li>
+                <li class="pure-menu-item"><a href="projects.html" class="pure-menu-link" role="menuitem">Projects</a></li>
+                <li class="pure-menu-item"><a href="articles.html" class="pure-menu-link" role="menuitem">Articles</a></li>
             </ul>
         </nav>
+        <script src="menu-size.js"></script>
     </header>
 
     <main>
-        <div class="maintenance-main pure-g">
-            <h1>WEBSITE BEING FABRICATED</h1>
+        <div class="pure-g" id="maintenance-main">
+            <h1>Website being fabricated</h1>
             <h2>Check back after its assembled!</h2>
         </div>
     </main>
@@ -37,6 +38,7 @@
     <footer>    <!-- #todo: Move footer to global HTML file. -->
         Timbur 2022
     </footer>
+
 </body>
 
 </html>
