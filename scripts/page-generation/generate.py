@@ -24,7 +24,7 @@ template = fileinput.input(SCRIPT_DIR + "\\template.html")
 nav = fileinput.input(SCRIPT_DIR + "\\nav.html")
 footer = fileinput.input(SCRIPT_DIR + "\\footer.html")
 
-with open(ROOT_DIR + '\\projects.html', 'w') as fout:
+with open(ROOT_DIR + '\\projects\\index.html', 'w') as fout:
     content = fileinput.input(SCRIPT_DIR + "\\projects.html")
     for line in template:
         fout.write(line)
@@ -40,7 +40,7 @@ template = fileinput.input(SCRIPT_DIR + "\\template.html")
 nav = fileinput.input(SCRIPT_DIR + "\\nav.html")
 footer = fileinput.input(SCRIPT_DIR + "\\footer.html")
 
-with open(ROOT_DIR + '\\articles.html', 'w') as fout:
+with open(ROOT_DIR + '\\articles\\index.html', 'w') as fout:
     content = fileinput.input(SCRIPT_DIR + "\\articles.html")
     for line in template:
         fout.write(line)
