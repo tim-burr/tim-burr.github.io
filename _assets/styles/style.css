@@ -17,7 +17,7 @@
 }
 
 @media only screen and (orientation: landscape) {
-    body { width: 80%; } /* Shrink to avoid mobile screen notch. */
+    body { width: 90%; } /* Shrink to avoid mobile screen notch. */
 }
 
 body {

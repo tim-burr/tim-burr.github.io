@@ -10,11 +10,10 @@ from utils.drive_tools import *
 from utils.config_loader import *
 
 class generator:
-    def __init__(self, root, config: configuration):
+    def __init__(self, config: configuration):
         self._config = config
-        self._paths = config.get_paths(root)
-        self._includes = config.get_includes(root)
-        self._defaults = config.get_defaults()
+        self._paths = config.get_paths()
+        self._includes = config.get_includes()
         self._pretty = config.get_pretty()
     
     def _parse_page(self, page):
@@ -31,10 +30,10 @@ class generator:
         
     def generate(self, page):
         # Instance references
-        template_dir = self._paths.get("templates")
-        template_file = template_dir / "default.html" # TODO: Needs config file logic
-        page_name = Path(page).stem  # Filename w/o extension
         build_dir = self._paths.get("build")
+        template_dir = self._paths.get("templates")
+        print(template_dir)
+        page_name = Path(page).stem  # Filename w/o extension
 
         # Exception: Homepage saves to build root
         # TODO: Find better way to implicitly handle this exception (YAML config item?)
@@ -50,25 +49,24 @@ class generator:
         metadata, content = self._parse_page(page)
         html_content = self._md_to_html(content)
 
-        # TODO: Make header/footer YAML configurable
-        # Open Includes for template insertion
-        with open(template_dir / "includes/header.html", 'r', encoding='utf-8') as f:
-            header = f.read()
-        with open(template_dir / "includes/footer.html", 'r', encoding='utf-8') as f:
-            footer = f.read()
-        # Buffer HTML template for parsing
-        with open(template_file, 'r') as temp:
-            html_doc = temp.read()
+        # Open templates for token replacement
+        open_templates = {}
+        for template,path in self._templates.items():
+            with open(path, 'r', encoding='utf-8') as f:
+                open_templates[template] = f.read()
+        
+        # TODO: Add logic for non-default templates
+        html_doc = open_templates.get("default")
 
         params = { # TODO: Make YAML configurable
             "{description}": metadata.get("description"),
             "{title}": metadata.get("title"),
             "{css}": metadata.get("css"), # TODO: Add logic for multiple CSS
-            "{header}": header,
+            "{header}": open_templates.get("header"),
             "{content}": html_content,
-            "{footer}": footer,
-            "{media}": "media",
-            "{styles}": "styles",
+            "{footer}": open_templates.get("footer"),
+            "{media}": "media", # TODO: Make YAML configurable
+            "{styles}": "styles" # TODO: Make YAML configurable
          }
         
         # Set active nav menu button

@@ -26,13 +26,13 @@ if __name__=="__main__":
         filepath = DEF_CONFIG
 
     # Load build config data
-    config = configuration(filepath)
+    config = configuration(ROOT_DIR, filepath)
     
     # Look up Includes
-    includes = config.get_includes(ROOT_DIR)
+    includes = config.get_includes()
 
     # Buffer filepaths from config data
-    paths = config.get_paths(ROOT_DIR)
+    paths = config.get_paths()
     page_dir = paths.get("pages")
     build_dir = paths.get("build")
 
@@ -45,7 +45,7 @@ if __name__=="__main__":
         copy_recursive(includes[i], build_dir)
 
     # Generate one HTML file per found Markdown file
-    run = generator(ROOT_DIR, config) # TODO: Simplify class instantiation without ROOT_DIR passed in?
+    run = generator(config)
 
     website = page_dir.rglob("*.md")
     for page in website:
