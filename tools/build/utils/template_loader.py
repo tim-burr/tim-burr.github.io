@@ -1,13 +1,14 @@
 # Imports
+from pathlib import Path
 # Custom
 from utils.drive_tools import *
 
 class template:
     def __init__(self, config):
-        self._dir = config.get_dict("paths").get("templates")
-        self._templates = {}
+        self._dir = Path(config.get_paths().get("templates"))
         self._filenames = walk_dir(self._dir)
-        self._open_essentials(config.get_dict("templates", self._dir))
+        self._templates = {}
+        self._open_essentials(config.get_templates(self._dir))
 
     # ****************
     # Private methods

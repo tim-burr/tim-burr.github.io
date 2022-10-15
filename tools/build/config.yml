@@ -1,4 +1,5 @@
 domain: "timbur.tech"
+homepage: "about" # no file extension
 
 paths: # relative
   build: "_site"
@@ -14,16 +15,8 @@ includes: # direct copy
   - _assets
   - _data
 
-tokens: # NOT USED YET
-  - description
-  - title
-  - css
-  - header
-  - content
-  - footer
-  - media
-  - styles
-
-homepage: "about" # no file extension
+tokens:
+  "{media}": "media"
+  "{styles}": "styles"
 
 html_pretty: true # true or false

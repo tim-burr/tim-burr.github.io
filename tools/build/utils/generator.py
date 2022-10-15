@@ -13,10 +13,14 @@ from utils.template_loader import *
 class generator:
     def __init__(self, config: configuration):
         self._config = config
-        self._paths = config.get_dict("paths")
         self._homepage = config.get_homepage()
+        self._paths = config.get_paths()
+        self._tokens = config.get_tokens()
         self._pretty = config.get_pretty()
     
+    # ****************
+    # Private methods
+    # ****************
     def _parse_page(self, page):
         # Split serialized YAML frontmatter from Markdown content
         with open(page) as f:
@@ -27,7 +31,10 @@ class generator:
         # Convert Markdown into HTML
         html = markdown(content)
         return html
-        
+    
+    # ****************
+    # Public methods
+    # ****************
     def generate(self, page, templates: template):
         # Instance references
         build_dir = self._paths.get("build")
@@ -42,17 +49,15 @@ class generator:
         layouts = templates.get_files(page_template)
         
         # Define recognized in-page template tags
-        params = { # TODO: Make YAML configurable (append metadata to dict of permanent entries)
-            "{description}": metadata.get("description"),
+        params = {
             "{title}": metadata.get("title"),
-            "{css}": metadata.get("css"), # TODO: Add logic for multiple CSS
+            "{description}": metadata.get("description"),
             "{header}": layouts.get("header"),
             "{content}": html_content,
-            "{footer}": layouts.get("footer"),
-            "{media}": "media", # TODO: Make YAML configurable
-            "{styles}": "styles" # TODO: Make YAML configurable
+            "{footer}": layouts.get("footer")
          }
-        
+        params = params | self._tokens # Append user-defined tokens
+
         # Set active nav menu button
         # Adds new dict key/value pair if needed
         category = metadata["category"]
@@ -61,7 +66,7 @@ class generator:
         except:
             print("No active menu links to update")
 
-        # Customize tags in template buffer
+        # Populate tokens in template buffer
         html_doc = layouts.get("content")
 
         for key, value in params.items():

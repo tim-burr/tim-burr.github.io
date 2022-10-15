@@ -30,7 +30,7 @@ if __name__=="__main__":
     config = configuration(ROOT_DIR, filepath)
     
     # Buffer filepaths from config data
-    paths = config.get_dict("paths")
+    paths = config.get_paths()
     page_dir = paths.get("pages")
     build_dir = paths.get("build")
 
@@ -39,13 +39,14 @@ if __name__=="__main__":
     # Create new, empty build directory
     create_directory(build_dir)
 
-    # Direct copy Includes into build directory
-    includes = config.get_list("includes")
+    # Directly copy Includes into build directory
+    includes = config.get_includes()
     for i, path in enumerate(includes):
         copy_recursive(includes[i], build_dir)
 
     # Initialize template lookup table
     templates = template(config)
+    
     # Generate one HTML file per found Markdown file
     run = generator(config)
 
