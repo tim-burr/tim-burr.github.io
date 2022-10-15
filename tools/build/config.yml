@@ -5,7 +5,7 @@ paths: # relative
   pages: "_pages"
   templates: "_templates"
 
-templates: # relative
+templates:
   default: "default.html"
   header: "modules/header.html"
   footer: "modules/footer.html"

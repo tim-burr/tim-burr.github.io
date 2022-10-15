@@ -13,16 +13,16 @@ class configuration:
         print("Build configuration loaded")
         return loaded
 
-    def _resolve_paths_dict(self, paths: dict):
+    def _resolve_paths_dict(self, base, paths: dict):
         # Prepend resolved file path to all config paths
         for key, value in paths.items():
-            paths[key] = self._root / value 
+            paths[key] = base / value 
         return paths
 
-    def _resolve_paths_list(self, paths: list):
+    def _resolve_paths_list(self, base, paths: list):
         # Prepend resolved file path to all config paths
         for i, dir in enumerate(paths):
-            paths[i] = self._root / dir
+            paths[i] = base / dir
         return paths
 
     def get_config(self):
@@ -31,18 +31,21 @@ class configuration:
     def get_domain(self):
         return self._config.get("domain")
 
+    # TODO: Refactor below to a single function "get_dict(self, base, key)"
     def get_paths(self):
         rel_paths = self._config.get("paths")
-        abs_paths = self._resolve_paths_dict(rel_paths)
+        abs_paths = self._resolve_paths_dict(self._root, rel_paths)
         return abs_paths
 
-    def get_templates(self):
-        return self._config.get("templates")
+    def get_templates(self, base = ''):
+        rel_paths = self._config.get("templates")
+        abs_paths = self._resolve_paths_dict(self._root / base, rel_paths)
+        return abs_paths
 
-    def get_includes(self):
-        rel_includes = self._config.get("includes")
-        abs_includes = self._resolve_paths_list(rel_includes)
-        return abs_includes
+    def get_includes(self, base = ''):
+        rel_paths = self._config.get("includes")
+        abs_paths = self._resolve_paths_list(self._root / base, rel_paths)
+        return abs_paths
 
     def get_tokens(self):
         pass

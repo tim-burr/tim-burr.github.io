@@ -28,19 +28,18 @@ if __name__=="__main__":
     # Load build config data
     config = configuration(ROOT_DIR, filepath)
     
-    # Look up Includes
-    includes = config.get_includes()
-
     # Buffer filepaths from config data
     paths = config.get_paths()
     page_dir = paths.get("pages")
     build_dir = paths.get("build")
 
-    # Remove build directory (fresh build)
+    # Remove old build directory, if exists
     delete_directory(build_dir)
-    # Create empty build directory to start
+    # Create new, empty build directory
     create_directory(build_dir)
+
     # Direct copy includes into build directory
+    includes = config.get_includes()
     for i, path in enumerate(includes):
         copy_recursive(includes[i], build_dir)
 
