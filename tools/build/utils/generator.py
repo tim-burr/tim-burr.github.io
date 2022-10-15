@@ -32,7 +32,6 @@ class generator:
         # Instance references
         build_dir = self._paths.get("build")
         template_dir = self._paths.get("templates")
-        print(template_dir)
         page_name = Path(page).stem  # Filename w/o extension
 
         # Exception: Homepage saves to build root
@@ -51,7 +50,7 @@ class generator:
 
         # Open templates for token replacement
         open_templates = {}
-        for template,path in self._templates.items():
+        for template, path in self._templates.items():
             with open(path, 'r', encoding='utf-8') as f:
                 open_templates[template] = f.read()
         
@@ -77,7 +76,7 @@ class generator:
             case "article": params["{inactive_articles}"] = "pure-menu-selected"
 
         # Customize tags in template buffer
-        for key,value in params.items():
+        for key, value in params.items():
             if key in html_doc:
                 html_doc = html_doc.replace(key,value)
         

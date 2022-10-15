@@ -1,12 +1,14 @@
 domain: "timbur.tech"
 
 paths: # relative
-  templates: "_templates"
-    default: "default.html"
-    header: "modules/header.html"
-    footer: "modules/footer.html"
-  pages: "_pages"
   build: "_site"
+  pages: "_pages"
+  templates: "_templates"
+
+templates: # relative
+  default: "default.html"
+  header: "modules/header.html"
+  footer: "modules/footer.html"
 
 includes: # direct copy
   - _assets
