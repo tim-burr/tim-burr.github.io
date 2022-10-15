@@ -1,33 +1,71 @@
 #!/bin/bash
+#!/usr/bin/python
 
+####################
+# Variables
+####################
 # PATHS
-curr_dir = 
-source_dir = ../
-publish_dir = ../_site
+HERE="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BUILD="$HERE"/build
+SRC="$(dirname "$HERE")"
+DEST="$SRC"/_site
+TEMP="$SRC"/.temp
+
+SOURCE_DIR="${1:-"$SRC"}"
+PUBLISH_DIR="${2:-"$DEST"}"
 
 # Git Branches
-source_branch = main
-publish_branch = published
+SOURCE_BRANCH="main"
+PUBLISH_BRANCH="published"
 
-# Commands
-build() {
-  build/build-site.py
-}
+####################
+# Initialize
+####################
+printf "\n\033[0;32mInitializing...\033[0m\n"
+# Anything needed here?
 
-# Script
-echo -e "\033[0;32mChecking out $publish_branch....\033[0m"
-git worktree add $publish_dir $publish_branch
+####################
+# Commit Source
+####################
+# Commit to remote branch
+printf "\n\033[0;32mEnter source commit description:\033[0m\n"
+read DESC
+cd "$SOURCE_DIR" &&
+  git add --all . &&
+  git commit -am "$DESC" &&
+  git push -u origin "$SOURCE_BRANCH"
 
-echo -e "\033[0;32mGenerating site...\033[0m"
-build
+####################
+# Publish Build
+####################
+# Check out tree branch
+printf "\n\033[0;32mCreating tree branch for $PUBLISH_BRANCH...\033[0m\n"
+git worktree add "$TEMP" "$PUBLISH_BRANCH" # Create dir if needed
+rm -rf -- "$TEMP"/* # Remove all files from previous branch commit, except for .*
 
-echo -e "\033[0;32mDeploying site to $publish_branch branch...\033[0m"
-cd $publish_dir &&
-  git add --all &&
-  git commit -m "Deploy updates" &&
-  git push origin $publish_branch
+# Build website
+printf "\n\033[0;32mGenerating site...\033[0m\n"
+python "$BUILD"/build-site.py # TO-DO: Have src and dir parameters configured by this script
 
-echo -e "\033[0;32mCleaning up...\033[0m"
-git worktree remove $publish_dir
+# Copy build contents to temporary directory
+cd 
+cp -r "$PUBLISH_DIR"/. "$TEMP"/
 
-cmd /k #(optional)
+# Commit to remote branch
+printf "\n\033[0;32mDeploying site to $PUBLISH_BRANCH branch...\033[0m\n"
+cd "$TEMP" &&
+  git add --all . &&
+  git commit -a --amend --no-edit && # Replace HEAD
+  git push -fu origin "$PUBLISH_BRANCH" # Force push
+
+####################
+# Cleanup
+####################
+printf "\n\033[0;32mCleaning up...\033[0m\n"
+cd "$SOURCE_DIR"
+git worktree remove -f "$TEMP" # Remove Git worktree and dir
+cd "$HERE" # Return to original directory
+
+# Final Status
+printf "\n\033[0;32mFinished!\033[0m\n"
+cmd /k # ~optional~

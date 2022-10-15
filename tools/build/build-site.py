@@ -11,9 +11,8 @@ import frontmatter
 
 
 # Directories
-ROOT_DIR = Path().resolve().parent.parent
+ROOT_DIR = Path(__file__).parents[2].resolve()
 CONFIG_DIR = ROOT_DIR / "_data"
-
 # Files
 DEFAULT_CONFIG = CONFIG_DIR / "config.yml"
 CNAME = ROOT_DIR / "CNAME"
@@ -130,7 +129,7 @@ def generate(page, paths):
     with open(new_file, 'w') as f:
         f.write(html_doc)
 
-    print("Page generated")
+    print ("Page generated")
 
 
 ########################
