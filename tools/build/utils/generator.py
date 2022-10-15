@@ -46,13 +46,17 @@ class generator:
         
         # Load overall page template
         # Check if default
+        html_doc = ''
         if metadata.get("template") == "default":
             html_doc = open_templates.get("default")
         # Else, search for requested template in page metadata
         else:
-            for key, content in open_templates.items():
-                if key == metadata.get("template") + ".html":
-                    html_doc = content
+            try:
+                for key, content in open_templates.items():
+                    if key == metadata.get("template") + ".html":
+                        html_doc = content
+            except:
+                print("No template found")
 
         params = { # TODO: Make YAML configurable
             "{description}": metadata.get("description"),
@@ -67,10 +71,13 @@ class generator:
         
         # Set active nav menu button
         # Adds new dict key/value pair if needed
-        match metadata["category"]:
-            case "about": params["{inactive_about}"] = "pure-menu-selected"
-            case "project": params["{inactive_projects}"] = "pure-menu-selected"
-            case "article": params["{inactive_articles}"] = "pure-menu-selected"
+        try:
+            match metadata["category"]:
+                case "about": params["{inactive_about}"] = "pure-menu-selected"
+                case "project": params["{inactive_projects}"] = "pure-menu-selected"
+                case "article": params["{inactive_articles}"] = "pure-menu-selected"
+        except:
+            print("No active menu links to update")
 
         # Customize tags in template buffer
         for key, value in params.items():
@@ -84,13 +91,14 @@ class generator:
         # Exception: Homepage saves to build root
         if page_name == self._homepage: 
             build_subdir = build_dir
+            new_file = build_subdir / "index.html"
         elif page_name == "404": # 404 page must be in root
             build_subdir = build_dir
+            new_file = build_subdir / "404.html"
         else:
             build_subdir = build_dir / page_name # Subdirectory name takes page name
+            new_file = build_subdir / "index.html"
        
-        new_file = build_subdir / "index.html"
-
         # Create build subdirectory if it doesn't exist
         create_directory(build_subdir)
 
