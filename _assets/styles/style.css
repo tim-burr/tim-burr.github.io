@@ -7,7 +7,7 @@
 
 body {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     width: 100vw; /* Ignore scrollbar */
     height: 100vh; /* Ignore scrollbar */
     font-size: 1rem;
@@ -65,7 +65,7 @@ img {
 #maintenance-main {
     z-index: 1;
     height: 100%;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     justify-content: center;
     align-content: center;
     text-align: center;
