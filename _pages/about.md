@@ -8,4 +8,4 @@ category: "about"
 
 # Website being fabricated
 ## Check back after its assembled!
-![Maintenance Icon](/{media}/maintenance.svg)
+<img id="maintenance-icon" src="/{media}/maintenance.svg" alt="Maintenance Icon">
