@@ -13,6 +13,7 @@ class generator:
     def __init__(self, config: configuration):
         self._config = config
         self._paths = config.get_paths()
+        self._templates = config.get_templates()
         self._includes = config.get_includes()
         self._pretty = config.get_pretty()
     
@@ -51,7 +52,7 @@ class generator:
         # Open templates for token replacement
         open_templates = {}
         for template, path in self._templates.items():
-            with open(path, 'r', encoding='utf-8') as f:
+            with open(template_dir / path, 'r', encoding='utf-8') as f:
                 open_templates[template] = f.read()
         
         # TODO: Add logic for non-default templates

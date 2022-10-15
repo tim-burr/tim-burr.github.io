@@ -37,7 +37,7 @@ class configuration:
         return abs_paths
 
     def get_templates(self):
-        pass
+        return self._config.get("templates")
 
     def get_includes(self):
         rel_includes = self._config.get("includes")
