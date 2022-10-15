@@ -1,4 +1,4 @@
-domain: "https://timbur.tech"
+domain: "timbur.tech"
 
 paths: # relative
   templates: "_templates"
@@ -7,11 +7,9 @@ paths: # relative
   media: "_assets/media"
   build: "_site"
 
+includes: # direct copy
+  - _assets
+  - _data
+
 defaults:
   layout: default
-
-includes:
- - _assets
- - _pages
- - .htaccess
- - CNAME

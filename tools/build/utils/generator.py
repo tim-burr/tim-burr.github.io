@@ -36,7 +36,7 @@ class generator:
         media = self._paths.get("media")
 
         # Exception: Homepage saves to build root
-        # TODO: Find better way to implicitly handle this exception
+        # TODO: Find better way to implicitly handle this exception (new frontmatter for landing page?)
         build_subdir = build_dir / page_name # Subdirectory name takes page name
         if page_name == "about":
             build_subdir = build_dir
@@ -82,6 +82,7 @@ class generator:
                 html_doc = html_doc.replace(key,value)
         
         # Prettify HTML (OPTIONAL)
+        # TODO: Make YAML configurable (i.e. compile option)
         html_doc = indent(html_doc)
 
         # Save HTML buffer to new file
