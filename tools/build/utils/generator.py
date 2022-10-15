@@ -16,23 +16,13 @@ class generator:
         # TODO: Add additional initialized data stores
     
     def _parse_page(self, page):
-        # Parse YAML frontmatter in open Markdown file
-        with open(page) as reader:
-            # Buffer all page data
-            data = frontmatter.loads(reader.read())
-        return data
-        
-    def _parse_frontmatter(self, data):
-        # Split frontmatter
-        params = {
-            "description": data["description"],
-            "title": data["title"],
-            "css": data["css"], # Add logic for multiple CSS
-            "category": data["category"]
-        }
-        return params
+        # Split YAML frontmatter from Markdown content
+        with open(page) as f:
+            # Buffer serialized page data
+            metadata, content = frontmatter.parse(f.read())
+        return metadata, content
 
-    def _convert_to_html(self, content):
+    def _md_to_html(self, content):
         # Convert Markdown into HTML
         html = markdown.markdown(content)
         return html
@@ -46,6 +36,7 @@ class generator:
         media = self._paths.get("media")
 
         # Exception: Homepage saves to build root
+        # TODO: Find better way to implicitly handle this exception
         build_subdir = build_dir / page_name # Subdirectory name takes page name
         if page_name == "about":
             build_subdir = build_dir
@@ -55,9 +46,8 @@ class generator:
         create_directory(build_subdir)
 
         # Convert Markdown into HTML
-        data = self._parse_page(page)
-        yaml = self._parse_frontmatter(data)
-        content = self._convert_to_html(data.content) # Split content
+        metadata, content = self._parse_page(page)
+        html_content = self._md_to_html(content)
 
         # Open Includes for template insertion
         with open(template_dir / "includes/header.html", 'r', encoding='utf-8') as f:
@@ -69,10 +59,11 @@ class generator:
             html_doc = temp.read()
 
         params = { # TODO: Make YAML configurable
-            "{description}": yaml.get("description"),
-            "{title}": yaml.get("title"),
+            "{description}": metadata.get("description"),
+            "{title}": metadata.get("title"),
+            "{css}": metadata.get("css"), # TODO: Add logic for multiple CSS
             "{header}": header,
-            "{content}": content,
+            "{content}": html_content,
             "{footer}": footer,
             "{media}": "media",
             "{styles}": "styles",
@@ -80,7 +71,7 @@ class generator:
         
          # Set active nav menu button
          # Adds new dict key/value if needed
-        match yaml["category"]:
+        match metadata["category"]:
             case "about": params["{inactive_about}"] = "pure-menu-selected"
             case "project": params["{inactive_projects}"] = "pure-menu-selected"
             case "article": params["{inactive_articles}"] = "pure-menu-selected"
