@@ -9,7 +9,7 @@ def copy_file(src, dest):
     try:
         shutil.copy(src, dest) # Preserves meta data
     except SameFileError:
-        print("Error: The src and dest are the same file.")
+        print("Error: Source and destination are the same file.")
     except IsADirectoryError:
         print("Error: The destination is a directory.")
 

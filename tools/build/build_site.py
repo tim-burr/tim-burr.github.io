@@ -38,7 +38,7 @@ if __name__=="__main__":
 
     # Remove build directory (fresh build)
     delete_directory(build_dir)
-    # Create build directory
+    # Create empty build directory to start
     create_directory(build_dir)
     # Direct copy includes into build directory
     for i, path in enumerate(includes):
