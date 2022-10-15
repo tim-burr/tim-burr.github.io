@@ -40,19 +40,19 @@ cd "$SOURCE_DIR" &&
 ####################
 # Check out tree branch
 printf "\n\033[0;32mCreating tree branch for $PUBLISH_BRANCH...\033[0m\n"
-git worktree add "$DEST" "$PUBLISH_BRANCH" # Create dir if needed
-rm -rf -- "$DEST"/* # Remove all files from previous branch commit, except for .*
+git worktree add "$TEMP" "$PUBLISH_BRANCH" # Create dir if needed
+rm -rf -- "$TEMP"/* # Remove all files from previous branch commit, except for .*
 
 # Build website
 printf "\n\033[0;32mGenerating site...\033[0m\n"
 python "$BUILD"/build-site.py # TO-DO: Have src and dir parameters configured by this script
 
 # Copy build contents to temporary directory
-#cp -r "$PUBLISH_DIR"/. "$DEST"/
+cp -r "$PUBLISH_DIR"/. "$TEMP"/
 
 # Commit to remote branch
 printf "\n\033[0;32mDeploying site to $PUBLISH_BRANCH branch...\033[0m\n"
-cd "$DEST" &&
+cd "$TEMP" &&
   git add --all . &&
   git commit -a --amend --no-edit && # Replace HEAD
   git push -fu origin "$PUBLISH_BRANCH" # Force push
@@ -62,7 +62,7 @@ cd "$DEST" &&
 ####################
 printf "\n\033[0;32mCleaning up...\033[0m\n"
 cd "$SOURCE_DIR"
-git worktree remove -f "$DEST" # Remove Git worktree and dir
+git worktree remove -f "$TEMP" # Remove Git worktree and dir
 cd "$HERE" # Return to original directory
 
 # Final Status

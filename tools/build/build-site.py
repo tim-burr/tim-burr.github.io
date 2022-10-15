@@ -151,7 +151,7 @@ media_dir = paths["media"]
 build_dir = paths["build"]
 
 # Clear outputs folder before new build
-#clear_directory(build_dir)
+clear_directory(build_dir)
 # Build page styles
 copy_directory(styles_dir, build_dir)
 # Build media
