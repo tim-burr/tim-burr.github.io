@@ -1,0 +1,30 @@
+# This script builds a static site and deploys it to gh-pages
+name: build-and-deploy
+
+# Only trigger this script with a push to the main dev branch
+on:
+  push:
+    branches: [ main ]
+
+# Run build and deploy steps
+jobs:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }} # Recommended for multiple deployments in quick succession.
+    runs-on: ubuntu-latest
+    steps:
+      # Download main branch
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      # Run build script
+      - name: Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+        run:
+          npm ci
+          npm run build
+
+      # Publish latest site build to gh-pages
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.3.0
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.

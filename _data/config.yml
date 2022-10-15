@@ -1,0 +1,17 @@
+domain: "https://timbur.tech"
+
+paths:
+  templates: "_templates"
+  pages: "_pages"
+  styles: "_assets/styles"
+  media: "_assets/media"
+  build: "_site"
+
+defaults:
+  layout: default
+
+includes:
+ - _assets
+ - _pages
+ - .htaccess
+ - CNAME

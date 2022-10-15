@@ -13,11 +13,11 @@
 }
 
 @media only screen and (orientation: portrait) {
-    main { width: 95%; }
+    body { width: 95%; }
 }
 
 @media only screen and (orientation: landscape) {
-    main { width: 90%; } /* Shrink to avoid mobile screen notch. */
+    body { width: 90%; } /* Shrink to avoid mobile screen notch. */
 }
 
 body {
@@ -25,6 +25,7 @@ body {
     flex-direction: column;
     width: 100vw;
     height: 100vh;
+    font-size: 100%;
 }
 
 header, main, footer {
