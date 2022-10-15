@@ -7,6 +7,7 @@ from pathlib import Path
 import markdown
 import yaml
 import frontmatter
+from yattag import indent
 # Custom
 
 
@@ -125,6 +126,9 @@ def generate(page, paths):
         if key in html_doc:
             html_doc = html_doc.replace(key,value)
     
+    # Prettify HTML (OPTIONAL)
+    html_doc = indent(html_doc)
+
     # Save HTML buffer to new file
     with open(new_file, 'w') as f:
         f.write(html_doc)
@@ -147,7 +151,7 @@ media_dir = paths["media"]
 build_dir = paths["build"]
 
 # Clear outputs folder before new build
-clear_directory(build_dir)
+#clear_directory(build_dir)
 # Build page styles
 copy_directory(styles_dir, build_dir)
 # Build media
