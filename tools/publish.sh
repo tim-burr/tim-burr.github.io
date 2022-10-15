@@ -28,7 +28,7 @@ printf "\n\033[0;32mInitializing...\033[0m\n"
 ####################
 # Commit to remote branch
 printf "\n\033[0;32mEnter source commit description:\033[0m\n"
-read DESC
+read -e DESC
 printf "\n"
 cd "$SOURCE_DIR" &&
   git add --all . &&
@@ -61,8 +61,8 @@ cd "$TEMP" &&
 # Cleanup
 ####################
 printf "\n\033[0;32mCleaning up...\033[0m\n"
-cd "$SOURCE_DIR"
-git worktree remove -f "$TEMP" # Remove Git worktree and dir
+cd "$SOURCE_DIR" &&
+  git worktree remove -f "$TEMP" # Remove Git worktree and dir
 cd "$HERE" # Return to original directory
 
 # Final Status

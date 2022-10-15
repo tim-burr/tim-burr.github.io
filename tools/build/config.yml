@@ -5,7 +5,7 @@
 # Required: Absolute path to website source directory
 root: 'D:\Bloomy Projects\Git\Timbur.Tech\tim-burr.github.io'
 
-# Optional: Domain name
+# Optional: Root domain
 domain: 'timbur.tech'
 # Required: Name of website homepage without file extension
 homepage: 'about'
@@ -16,23 +16,34 @@ paths:
   pages: '_pages'
   templates: '_templates'
 
-# Required: Relative paths (from root)
+# Required: Relative paths (from templates subdirectory)
 templates:
   default: 'default.html'
-  header: 'modules/header.html'
-  footer: 'modules/footer.html'
+  header: 'modules\header.html'
+  footer: 'modules\footer.html'
 
-# Required: Relative paths (from root).
-# Note: These files are directly copied into the directory specified at "paths/build". 
+# Optional: Relative paths (from root)
+# Note: The full contents of these subdirectories are copied into the build directory
 includes:
-  - _assets
-  - _data
+  - '_assets'
+  - '_data'
 
-# Required: User-defined tags to populate in user templates.
+# Optional: Global user-defined tags to populate in custom templates
 # Format is '{tag}': 'value'
 tokens:
   '{media}': 'media'
   '{styles}': 'styles'
 
-# Optional: Set true for formatted HTML outputs. Set false for unformatted (faster build time).
+# Required:
+# true = formatted HTML outputs
+# false = unformatted (faster build time)
 html_pretty: true
+
+####################
+# EXPERIMENTAL
+####################
+
+# Required:
+# true = rebuild website entirely, regardless of unchanged pages
+# false = only compile modified pages and templates (faster build time)
+clean_build: true
