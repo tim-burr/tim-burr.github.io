@@ -20,8 +20,6 @@ header, main, footer {
 
 header, main {
     background-color: #FFF;
-    padding-left: 2.5vw; /* Shrink to avoid mobile screen notch. */
-    padding-right: 2.5vw; /* Shrink to avoid mobile screen notch. */
 }
 
 header {
@@ -87,6 +85,22 @@ img {
 /*
 Media queries must appear at end of CSS to overwrite defaults
 */
+
+@media only screen and (orientation: landscape) {
+    /* Shrink to avoid mobile screen notch. */
+    header, main {
+        padding-left: 2.5vw;
+        padding-right: 2.5vw;
+    }
+}
+
+@media only screen and (orientation: portrait) {
+    /* Match landscape padding for rotation consistency */
+    header, main {
+        padding-left: 2.5vw;
+        padding-right: 2.5vw;
+    }
+}
 
 /* Tablets */
 @media (max-width: 48em) {
