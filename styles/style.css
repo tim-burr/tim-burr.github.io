@@ -61,6 +61,8 @@ main {
 }
 
 footer {
+    position: relative;
+    bottom: 0;
     flex-shrink: 0;
     background-color: #245;
     color: #ccc;
