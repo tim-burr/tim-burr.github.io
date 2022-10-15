@@ -11,13 +11,13 @@ class configuration:
         print("Build configuration loaded")
         return loaded
 
-    def _resolve_paths1(self, root, paths):
+    def _resolve_paths_dict(self, root, paths):
         # Prepend resolved file path to all config paths
         for key, value in paths.items():
             paths[key] = root / value 
         return paths
 
-    def _resolve_paths2(self, root, paths):
+    def _resolve_paths_list(self, root, paths):
         # Prepend resolved file path to all config paths
         for i, dir in enumerate(paths):
             paths[i] = root / dir
@@ -31,13 +31,16 @@ class configuration:
 
     def get_paths(self, root):
         rel_paths = self._config.get("paths")
-        abs_paths = self._resolve_paths1(root, rel_paths)
+        abs_paths = self._resolve_paths_dict(root, rel_paths)
         return abs_paths
         
     def get_includes(self, root):
         rel_includes = self._config.get("includes")
-        abs_includes = self._resolve_paths2(root, rel_includes)
+        abs_includes = self._resolve_paths_list(root, rel_includes)
         return abs_includes
 
     def get_defaults(self):
         return self._config.get("defaults")
+
+    def get_pretty(self):
+        return self._config.get("html_pretty")

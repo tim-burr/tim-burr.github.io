@@ -11,9 +11,11 @@ from utils.config_loader import *
 
 class generator:
     def __init__(self, root, config: configuration):
-        self._config = config # TODO: Make better use of YAML config, not just for paths
+        self._config = config
         self._paths = config.get_paths(root)
-        # TODO: Add additional initialized data stores
+        self._includes = config.get_includes(root)
+        self._defaults = config.get_defaults()
+        self._pretty = config.get_pretty()
     
     def _parse_page(self, page):
         # Split YAML frontmatter from Markdown content
@@ -33,10 +35,9 @@ class generator:
         template_file = template_dir / "default.html" # TODO: Needs config file logic
         page_name = Path(page).stem  # Filename w/o extension
         build_dir = self._paths.get("build")
-        media = self._paths.get("media")
 
         # Exception: Homepage saves to build root
-        # TODO: Find better way to implicitly handle this exception (new frontmatter for landing page?)
+        # TODO: Find better way to implicitly handle this exception (YAML config item?)
         build_subdir = build_dir / page_name # Subdirectory name takes page name
         if page_name == "about":
             build_subdir = build_dir
@@ -49,6 +50,7 @@ class generator:
         metadata, content = self._parse_page(page)
         html_content = self._md_to_html(content)
 
+        # TODO: Make header/footer YAML configurable
         # Open Includes for template insertion
         with open(template_dir / "includes/header.html", 'r', encoding='utf-8') as f:
             header = f.read()
@@ -69,8 +71,8 @@ class generator:
             "{styles}": "styles",
          }
         
-         # Set active nav menu button
-         # Adds new dict key/value if needed
+        # Set active nav menu button
+        # Adds new dict key/value if needed
         match metadata["category"]:
             case "about": params["{inactive_about}"] = "pure-menu-selected"
             case "project": params["{inactive_projects}"] = "pure-menu-selected"
@@ -81,9 +83,9 @@ class generator:
             if key in html_doc:
                 html_doc = html_doc.replace(key,value)
         
-        # Prettify HTML (OPTIONAL)
-        # TODO: Make YAML configurable (i.e. compile option)
-        html_doc = indent(html_doc)
+        # Prettify HTML (option)
+        if self._pretty:
+            html_doc = indent(html_doc)
 
         # Save HTML buffer to new file
         with open(new_file, 'w') as f:
