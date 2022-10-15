@@ -56,10 +56,7 @@ class generator:
         # Adds new dict key/value pair if needed
         category = metadata["category"]
         try:
-            match category:
-                case "about": params["{inactive_about}"] = "pure-menu-selected"
-                case "project": params["{inactive_projects}"] = "pure-menu-selected"
-                case "article": params["{inactive_articles}"] = "pure-menu-selected"
+            params[f"{{inactive_{category}}}"] = "pure-menu-selected"
         except:
             print("No active menu links to update")
 
