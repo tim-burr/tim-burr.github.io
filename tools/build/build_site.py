@@ -5,6 +5,7 @@ from pathlib import Path
 # Custom
 from utils.drive_tools import *
 from utils.config_loader import *
+from utils.template_loader import *
 from utils.generator import *
 
 # Directories
@@ -38,16 +39,18 @@ if __name__=="__main__":
     # Create new, empty build directory
     create_directory(build_dir)
 
-    # Direct copy includes into build directory
+    # Direct copy Includes into build directory
     includes = config.get_list("includes")
     for i, path in enumerate(includes):
         copy_recursive(includes[i], build_dir)
 
+    # Create static template container
+    templates = template(config)
     # Generate one HTML file per found Markdown file
     run = generator(config)
 
     website = page_dir.rglob("*.md")
     for page in website:
-        run.generate(page)
+        run.generate(page, templates)
 
     print("\nWebsite generated!")

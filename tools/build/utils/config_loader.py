@@ -4,9 +4,8 @@ import yaml
 # Script configuration manager
 class configuration:
     def __init__(self, root, file):
-        print(file)
-        self._config = self._open_config(file)
         self._root = root
+        self._config = self._open_config(file)
     
     def _open_config(self, file):
         loaded = yaml.safe_load(open(file, 'r'))
