@@ -17,7 +17,7 @@
 }
 
 @media only screen and (orientation: landscape) {
-    body { width: 90%; } /* Shrink to avoid mobile screen notch. */
+    body { width: 80%; } /* Shrink to avoid mobile screen notch. */
 }
 
 body {
@@ -58,6 +58,7 @@ header .menu-container {
 main {
     z-index: 50;
     flex: 1 0 auto;
+    font-size: 85%; /* Override Pure CSS */
 }
 
 footer {
