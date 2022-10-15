@@ -1,37 +1,32 @@
 # Imports
-import sys
+import argparse
 
-def open():
-    python3 -m http.server
+class CommandLine:
+    def __init__(self):
+        parser = argparse.ArgumentParser(description = "Local HTTP server")
+        parser.add_argument("-o", "--open", help = "", required = False, default = "")
+        parser.add_argument("-r", "--run", help = "", required = False, default = "") # TODO: Add input var for HTML directory
+        parser.add_argument("-c", "--close", help = "", required = False, default = "")
+        
+        argument = parser.parse_args()
+        self.parse(argument)
 
-def launch(url):
+    def parse(self, arg):
+        match arg:
+            case arg.open:
+                print("cmd")
 
-def close():
+            case arg.run:
+                print("cmd")
 
+            case arg.close:
+                print("cmd")
 
+            case _:
+                print("unsupported")
+                
 ########################
 # Main
 ########################
 if __name__=="__main__":
-    print("""
-    Server Commands:
-    1. "open"
-    2. "launch  [local URL]"
-    3. "close"
-    """)
-
-    # Run until user exits program
-    while True:
-        # Get program command
-        command, url = input("\nEnter command: ")
-
-        match command:
-            case "open":
-                open()
-            case "launch":
-                launch(url)
-            case "close":
-                close()
-            case "exit":
-                quit()
-            case _: print("Command not supported")
+    CommandLine()

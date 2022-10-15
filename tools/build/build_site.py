@@ -44,7 +44,7 @@ if __name__=="__main__":
     for i, path in enumerate(includes):
         copy_recursive(includes[i], build_dir)
 
-    # Create static template container
+    # Initialize template lookup table
     templates = template(config)
     # Generate one HTML file per found Markdown file
     run = generator(config)

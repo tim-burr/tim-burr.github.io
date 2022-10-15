@@ -38,7 +38,8 @@ class generator:
         html_content = self._md_to_html(content)
 
         # Get page layout components from templates
-        layouts = templates.get_files(metadata.get("template"))
+        page_template = metadata.get("template")
+        layouts = templates.get_files(page_template)
         
         # Define recognized in-page template tags
         params = { # TODO: Make YAML configurable
