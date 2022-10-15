@@ -1,7 +1,15 @@
 main {
+    z-index: 1;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
     align-content: center;
     text-align: center;
     letter-spacing: normal;
     background-color: #245;
+    color: #ccc;
+}
+
+main a {
     color: #ccc;
 }
