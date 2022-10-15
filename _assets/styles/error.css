@@ -1,10 +1,12 @@
-#error {
+main {
     height: 100%;
-    margin-top: 20vh;
-    margin-bottom: 20vh;
+    background-color: #245;
+    padding: 30vh;
+}
+
+#error {
     text-align: center;
     letter-spacing: normal;
-    background-color: #245;
     color: #ccc;
 }
 
