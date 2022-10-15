@@ -42,7 +42,7 @@ class generator:
         layouts = templates.get_files(page_template)
         
         # Define recognized in-page template tags
-        params = { # TODO: Make YAML configurable
+        params = { # TODO: Make YAML configurable (append metadata to dict of permanent entries)
             "{description}": metadata.get("description"),
             "{title}": metadata.get("title"),
             "{css}": metadata.get("css"), # TODO: Add logic for multiple CSS
