@@ -1,9 +1,7 @@
-main {
-    z-index: 1;
+main #error {
     height: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
+    margin-top: 20vh;
+    margin-bottom: 20vh;
     text-align: center;
     letter-spacing: normal;
     background-color: #245;
