@@ -7,9 +7,9 @@
 
 body {
     display: flex;
-    flex-direction: column;
-    width: 100vw; /* Ignores scrollbar */
-    height: 100vh; /* Ignores scrollbar */
+    flex-flow: column wrap;
+    width: 100vw; /* Ignore scrollbar */
+    height: 100vh; /* Ignore scrollbar */
     font-size: 1rem;
 }
 
@@ -25,40 +25,33 @@ header, main {
 header {
     z-index: 100;
     position: sticky;
-    top: 0;
-    flex-shrink: 0;
+    flex: 0 0 auto; /* No shrink */
     text-transform: uppercase;
     font-size: 140%;
 }
 
-.menu-container {
-    display: flex;
-}
-
 header .menu-container {
     overflow: hidden;
-    flex-wrap: nowrap;
+    display: flex;
+    flex-flow: row nowrap;
     justify-content: space-between;
 }
 
 main {
     z-index: 50;
-    flex: 1 0 auto;
-    font-size: 85%; /* Override Pure CSS */
+    flex: 1 0 auto; /* Grow to fill page */
+    align-items: flex-start;
+    font-size: 85%;
 }
 
 footer {
-    flex-shrink: 0;
+    flex: 0 0 auto; /* No shrink */
     background-color: #245;
     color: #ccc;
     text-align: center;
     text-transform: uppercase;
     font-size: 80%;
     padding: 1em;
-}
-
-div {
-    display: block;
 }
 
 h1 {
@@ -72,7 +65,7 @@ img {
 #maintenance-main {
     z-index: 1;
     height: 100%;
-    flex-direction: column;
+    flex-flow: column wrap;
     justify-content: center;
     align-content: center;
     text-align: center;
@@ -81,6 +74,7 @@ img {
 
 #maintenance-main h1 {
     margin: 0;
+    text-transform: uppercase;
 }
 
 #maintenance-icon {
@@ -124,6 +118,6 @@ Media queries must appear at end of CSS to overwrite defaults
         letter-spacing: 0.1em !important;
     }
     .menu-container {
-        flex-wrap: wrap !important;
+        flex-flow: row wrap !important;
     }
 }
