@@ -92,11 +92,17 @@ class generator:
         if page_name == self._homepage:
             build_subdir = build_dir
             new_file = build_subdir / "index.html"
-        elif page_name == "404": # 404 page must be in root
+        # Exception: Error page saves to build root
+        elif page_name == "404":
             build_subdir = build_dir
             new_file = build_subdir / "404.html"
+        # Exception: Launch pages live near top of directory
+        elif page_name == metadata["category"]:
+            build_subdir = build_dir / page_name
+            new_file = build_subdir / "index.html"
+        # Else, child pages get their own subfolder
         else:
-            build_subdir = build_dir / page_name # Subdirectory name takes page name
+            build_subdir = build_dir / metadata["category"] / page_name
             new_file = build_subdir / "index.html"
        
         # Create build subdirectory if it doesn't exist

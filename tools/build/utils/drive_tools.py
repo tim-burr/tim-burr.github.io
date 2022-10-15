@@ -28,8 +28,9 @@ def walk_dir(dir):
     return files # (filename, absolute path)
 
 def create_directory(dir):
-    print(f"Create: directory {dir}\\")
-    Path.mkdir(dir, parents=True, exist_ok=True)
+    if not Path(dir).exists():
+        print(f"Create: directory {dir}\\")
+        Path.mkdir(dir, parents=True)
     
 def delete_directory(dir):
     if Path(dir).exists():
