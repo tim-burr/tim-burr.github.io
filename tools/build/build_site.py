@@ -29,7 +29,7 @@ if __name__=="__main__":
     config = configuration(ROOT_DIR, filepath)
     
     # Buffer filepaths from config data
-    paths = config.get_paths()
+    paths = config.get_dict("paths")
     page_dir = paths.get("pages")
     build_dir = paths.get("build")
 
@@ -39,7 +39,7 @@ if __name__=="__main__":
     create_directory(build_dir)
 
     # Direct copy includes into build directory
-    includes = config.get_includes()
+    includes = config.get_list("includes")
     for i, path in enumerate(includes):
         copy_recursive(includes[i], build_dir)
 

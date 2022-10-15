@@ -1,14 +1,12 @@
 # Imports
-import os
 import shutil
-from shutil import SameFileError
 from pathlib import Path
 
 def copy_file(src, dest):
     print(f"Copy: file {src} into {dest}")
     try:
         shutil.copy(src, dest) # Preserves meta data
-    except SameFileError:
+    except shutil.SameFileError:
         print("Error: Source and destination are the same file.")
     except IsADirectoryError:
         print("Error: The destination is a directory.")
@@ -26,11 +24,11 @@ def copy_recursive(src, dest):
 def create_directory(dir):
     print(f"Create: directory {dir}\\")
     # Add try-catch path check here
-    if not Path(dir).exists():
-        os.makedirs(dir, exist_ok=True)
+    if not Path(dir).exists(): # TODO: Check if this line is needed, if exist_ok exists. Same for other functions in this module.
+        Path.mkdir(dir, parents=True, exist_ok=True)
     
 def delete_directory(dir):
     print(f"Remove: directory {dir}\\")
     # Add try-catch path check here
-    if os.path.exists(dir):
+    if Path(dir).exists():
         shutil.rmtree(dir)

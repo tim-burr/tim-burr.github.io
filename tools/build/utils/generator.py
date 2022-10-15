@@ -6,14 +6,14 @@ import frontmatter
 from markdown import markdown
 from yattag import indent
 # Custom
-from utils.drive_tools import *
+from utils.drive_tools import create_directory
 from utils.config_loader import *
 
 class generator:
     def __init__(self, config: configuration):
         self._config = config
-        self._paths = config.get_paths()
-        self._templates = config.get_templates(self._paths.get("templates"))
+        self._paths = config.get_dict("paths")
+        self._templates = config.get_dict("templates", self._paths.get("templates"))
         self._pretty = config.get_pretty()
     
     def _parse_page(self, page):
