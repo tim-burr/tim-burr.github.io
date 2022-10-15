@@ -1,4 +1,4 @@
-main #error {
+#error {
     height: 100%;
     margin-top: 20vh;
     margin-bottom: 20vh;
@@ -8,6 +8,6 @@ main #error {
     color: #ccc;
 }
 
-main a {
+a {
     color: #ccc;
 }
