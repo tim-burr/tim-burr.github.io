@@ -8,7 +8,8 @@ class configuration:
         self._config = self._open_config(file)
     
     def _open_config(self, file):
-        loaded = yaml.safe_load(open(file, 'r'))
+        with open(file, 'r') as f:
+            loaded = yaml.safe_load(f)
         print("Build configuration loaded")
         return loaded
 
