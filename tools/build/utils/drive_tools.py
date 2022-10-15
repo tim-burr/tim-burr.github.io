@@ -21,6 +21,12 @@ def copy_recursive(src, dest):
     print(f"Copy: {src}\\ into {dest}\\")
     shutil.copytree(src, dest, dirs_exist_ok=True)
 
+def walk_dir(dir):
+    files = {}
+    for file in Path(dir).rglob('*.*'):
+        files[file.stem] = file.resolve()
+    return files # (filename, absolute path)
+
 def create_directory(dir):
     print(f"Create: directory {dir}\\")
     Path.mkdir(dir, parents=True, exist_ok=True)

@@ -6,7 +6,7 @@ import frontmatter
 from markdown import markdown
 from yattag import indent
 # Custom
-from utils.drive_tools import create_directory
+from utils.drive_tools import *
 from utils.config_loader import *
 
 class generator:
@@ -37,34 +37,33 @@ class generator:
         metadata, content = self._parse_page(page)
         html_content = self._md_to_html(content)
 
-        # Open all templates for token replacement
-        # Note: Some efficiency is lost here for simplicity
-        open_templates = {}
+        # Open all essential templates for token replacement
+        essential_templates = {}
         for template, path in self._templates.items():
             with open(path, 'r', encoding='utf-8') as f:
-                open_templates[template] = f.read()
+                essential_templates[template] = f.read()
         
-        # Load overall page template
-        # Check if default
-        html_doc = ''
-        if metadata.get("template") == "default":
-            html_doc = open_templates.get("default")
-        # Else, search for requested template in page metadata
-        else:
-            try:
-                for key, content in open_templates.items():
-                    if key == metadata.get("template") + ".html":
-                        html_doc = content
-            except:
-                print("No template found")
+        # Set requested template as default, for now...
+        html_doc = essential_templates.get("default")
+
+        # Store dict of all files in template directory for later lookup
+        all_templates = walk_dir(self._paths.get("templates"))
+
+        # Search if more specific template was actually requested 
+        try:
+            real_template_path = all_templates[metadata.get("template")] 
+            with open(real_template_path, 'r', encoding='utf-8') as f:
+                html_doc = f.read()
+        except:
+            print("Using default template")
 
         params = { # TODO: Make YAML configurable
             "{description}": metadata.get("description"),
             "{title}": metadata.get("title"),
             "{css}": metadata.get("css"), # TODO: Add logic for multiple CSS
-            "{header}": open_templates.get("header"),
+            "{header}": essential_templates.get("header"),
             "{content}": html_content,
-            "{footer}": open_templates.get("footer"),
+            "{footer}": essential_templates.get("footer"),
             "{media}": "media", # TODO: Make YAML configurable
             "{styles}": "styles" # TODO: Make YAML configurable
          }
@@ -88,8 +87,9 @@ class generator:
         if self._pretty:
             html_doc = indent(html_doc)
 
+        # TODO: Remove if-elif. Make generic based on directory structure.
         # Exception: Homepage saves to build root
-        if page_name == self._homepage: 
+        if page_name == self._homepage:
             build_subdir = build_dir
             new_file = build_subdir / "index.html"
         elif page_name == "404": # 404 page must be in root
