@@ -1,24 +1,38 @@
+####################
+# WAG Configuration
+####################
+
+# Required: Absolute path to website source directory
 root: 'D:\Bloomy Projects\Git\Timbur.Tech\tim-burr.github.io'
 
-domain: "timbur.tech"
-homepage: "about" # no file extension
+# Optional: Domain name
+domain: 'timbur.tech'
+# Required: Name of website homepage without file extension
+homepage: 'about'
 
-paths: # relative
-  build: "_site"
-  pages: "_pages"
-  templates: "_templates"
+# Required: Relative paths (from root)
+paths:
+  build: '_site'
+  pages: '_pages'
+  templates: '_templates'
 
-templates: # relative
-  default: "default.html"
-  header: "modules/header.html"
-  footer: "modules/footer.html"
+# Required: Relative paths (from root)
+templates:
+  default: 'default.html'
+  header: 'modules/header.html'
+  footer: 'modules/footer.html'
 
-includes: # direct copy
+# Required: Relative paths (from root).
+# Note: These files are directly copied into the directory specified at "paths/build". 
+includes:
   - _assets
   - _data
 
+# Required: User-defined tags to populate in user templates.
+# Format is '{tag}': 'value'
 tokens:
-  "{media}": "media"
-  "{styles}": "styles"
+  '{media}': 'media'
+  '{styles}': 'styles'
 
-html_pretty: true # true or false
+# Optional: Set true for formatted HTML outputs. Set false for unformatted (faster build time).
+html_pretty: true
