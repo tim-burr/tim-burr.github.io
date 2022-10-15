@@ -84,6 +84,8 @@ class generator:
         # Exception: Homepage saves to build root
         if page_name == self._homepage: 
             build_subdir = build_dir
+        elif page_name == "404": # 404 page must be in root
+            build_subdir = build_dir
         else:
             build_subdir = build_dir / page_name # Subdirectory name takes page name
        
