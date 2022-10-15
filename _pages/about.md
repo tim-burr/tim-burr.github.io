@@ -2,7 +2,7 @@
 title: "Timbur: Projects, Tips & Tricks."
 description: "The portfolio of Tim Burroughs."
 template: default
-css: default
+css: "about"
 category: "about"
 ---
 

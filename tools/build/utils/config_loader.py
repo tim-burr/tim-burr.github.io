@@ -22,6 +22,9 @@ class configuration:
     def get_tokens(self):
         pass
 
+    def get_homepage(self):
+        return self._config.get("homepage")
+
     def get_pretty(self):
         return self._config.get("html_pretty")
 

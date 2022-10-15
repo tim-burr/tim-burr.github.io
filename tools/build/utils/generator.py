@@ -14,6 +14,7 @@ class generator:
         self._config = config
         self._paths = config.get_dict("paths")
         self._templates = config.get_dict("templates", self._paths.get("templates"))
+        self._homepage = config.get_homepage()
         self._pretty = config.get_pretty()
     
     def _parse_page(self, page):
@@ -36,14 +37,22 @@ class generator:
         metadata, content = self._parse_page(page)
         html_content = self._md_to_html(content)
 
-        # Open templates for token replacement
+        # Open all templates for token replacement
+        # Note: Some efficiency is lost here for simplicity
         open_templates = {}
         for template, path in self._templates.items():
             with open(path, 'r', encoding='utf-8') as f:
                 open_templates[template] = f.read()
         
-        # TODO: Add logic for non-default templates
-        html_doc = open_templates.get("default")
+        # Load overall page template
+        # Check if default
+        if metadata.get("template") == "default":
+            html_doc = open_templates.get("default")
+        # Else, search for requested template in page metadata
+        else:
+            for key, content in open_templates.items():
+                if key == metadata.get("template") + ".html":
+                    html_doc = content
 
         params = { # TODO: Make YAML configurable
             "{description}": metadata.get("description"),
@@ -73,10 +82,11 @@ class generator:
             html_doc = indent(html_doc)
 
         # Exception: Homepage saves to build root
-        # TODO: Find generic way to implicitly handle this exception (YAML config item?)
-        build_subdir = build_dir / page_name # Subdirectory name takes page name
-        if page_name == "about":
+        if page_name == self._homepage: 
             build_subdir = build_dir
+        else:
+            build_subdir = build_dir / page_name # Subdirectory name takes page name
+       
         new_file = build_subdir / "index.html"
 
         # Create build subdirectory if it doesn't exist

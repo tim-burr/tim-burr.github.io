@@ -24,4 +24,6 @@ tokens: # NOT USED YET
   - media
   - styles
 
+homepage: "about" # no file extension
+
 html_pretty: true
