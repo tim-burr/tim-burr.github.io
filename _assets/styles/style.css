@@ -1,9 +1,28 @@
-/* Global styles */
+/*
+Global styles
+*/
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
+:root {
+    /* Color palette */
+    --white: #FFF;
+    --gray: #CCC;
+    --blue: #245;
+    --lt-blue: #006A78;
+    --teal: #00928A;
+    --green: #4AB989;
+    --lt-green: #9BDC7B;
+    --yellow: #F9F871;
+}
+
+/*
+Normal styles
+*/
 
 body {
     display: flex;
@@ -19,7 +38,7 @@ header, main, footer {
 }
 
 header, main {
-    background-color: #FFF;
+    background-color: var(--white);
 }
 
 header {
@@ -47,8 +66,8 @@ main {
 
 footer {
     flex: 0 0 auto; /* No shrink */
-    background-color: #245;
-    color: #ccc;
+    background-color: var(--blue);
+    color: var(--gray);
     text-align: center;
     text-transform: uppercase;
     font-size: 80%;
