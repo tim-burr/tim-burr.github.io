@@ -39,13 +39,13 @@ cd "$SOURCE_DIR" &&
 # Publish Build
 ####################
 # Check out tree branch
-printf "\n\033[0;32mCreating tree branch for $PUBLISH_BRANCH...\033[0m\n"
+printf "\n\033[0;32mCreating tree branch of $PUBLISH_BRANCH...\033[0m\n"
 git worktree add "$TEMP" "$PUBLISH_BRANCH" # Create dir if needed
 rm -rf -- "$TEMP"/* # Remove all files from previous branch commit, except for .*
 
 # Build website
 printf "\n\033[0;32mGenerating site...\033[0m\n"
-python "$BUILD"/build_site.py # TO-DO: Have src and dir parameters configured by this script
+python "$BUILD"/build_site.py
 
 # Copy build contents to temporary directory
 cp -r "$PUBLISH_DIR"/. "$TEMP"/
