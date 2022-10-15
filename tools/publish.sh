@@ -5,7 +5,7 @@
 ####################
 # PATHS
 HERE="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-BUILD="$HERE"/build
+BUILD="$HERE"/build/WAG
 SRC="$(dirname "$HERE")"
 DEST="$SRC"/_site
 TEMP="$SRC"/.temp
