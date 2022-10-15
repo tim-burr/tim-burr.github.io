@@ -54,14 +54,6 @@ header .menu-container {
     justify-content: space-between;
 }
 
-header #menu-icon {
-    display: none;
-}
-
-.nav-responsive li {
-    display: none !important; /* Override framework menu style. */
-}
-
 main {
     z-index: 50;
     flex: 1 0 auto;
