@@ -1,6 +1,6 @@
 domain: "https://timbur.tech"
 
-paths:
+paths: # relative
   templates: "_templates"
   pages: "_pages"
   styles: "_assets/styles"
