@@ -44,7 +44,7 @@ rm -rf -- "$TEMP"/* # Remove all files from previous branch commit, except for .
 
 # Build website
 printf "\n\033[0;32mGenerating site...\033[0m\n"
-python3 "$BUILD"/build_site.py # TO-DO: Have src and dir parameters configured by this script
+python "$BUILD"/build_site.py # TO-DO: Have src and dir parameters configured by this script
 
 # Copy build contents to temporary directory
 cp -r "$PUBLISH_DIR"/. "$TEMP"/
