@@ -1,3 +1,4 @@
 [submodule "WAG"]
 	path = tools/build/WAG
 	url = https://github.com/tim-burr/WAG
+	update = merge
