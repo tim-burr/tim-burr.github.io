@@ -10,4 +10,4 @@ Check in regularly for interesting circuits, PCB design tips, and new projects t
 - Pure-CSS (lightweight style framework)
 - Custom static site generator
 
-**Note:** Only the source files are versioned here. See branch for published website.
+**Note:** Only source files are versioned here. See branch for published website.
