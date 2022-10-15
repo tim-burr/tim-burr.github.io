@@ -54,10 +54,6 @@ header .menu-container {
     justify-content: space-between;
 }
 
-header .list-container {
-    width: 460px;
-}
-
 header #menu-icon {
     display: none;
 }
