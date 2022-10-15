@@ -29,6 +29,7 @@ printf "\n\033[0;32mInitializing...\033[0m\n"
 # Commit to remote branch
 printf "\n\033[0;32mEnter source commit description:\033[0m\n"
 read DESC
+printf "\n"
 cd "$SOURCE_DIR" &&
   git add --all . &&
   git commit -am "$DESC" &&
