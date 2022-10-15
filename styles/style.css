@@ -17,7 +17,7 @@
 }
 
 @media only screen and (orientation: landscape) {
-    main { width: 90%; }    /* Shrink a little more to avoid the notch. */
+    main { width: 90%; } /* Shrink to avoid mobile screen notch. */
 }
 
 body {
@@ -45,19 +45,26 @@ header {
     font-size: 1.4em;
 }
 
+.menu-container {
+    display: flex;
+}
+
 header .menu-container {
     overflow: hidden;
     justify-content: space-between;
 }
 
-.menu-container {
-    display: flex;
+header #menu-icon {
+    display: none;
+}
+
+.nav-responsive li {
+    display: none !important; /* Override framework menu style. */
 }
 
 main {
     z-index: 50;
     flex: 1 0 auto;
-    line-height: 1;
 }
 
 footer {
@@ -86,4 +93,8 @@ h1 {
     align-content: center;
     text-align: center;
     letter-spacing: normal;
+}
+
+#maintenance-main h1 {
+    margin: 0;
 }
