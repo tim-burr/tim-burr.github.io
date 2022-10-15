@@ -85,21 +85,7 @@ img {
 Media queries must appear at end of CSS to overwrite defaults
 */
 
-@media only screen and (orientation: portrait) {
-    header, main {
-        padding-left: 2.5vw;
-        padding-right: 2.5vw;
-    }
-}
-
-@media only screen and (orientation: landscape) {
-    /* Shrink to avoid mobile screen notch. */
-    header, main {
-        padding-left: 2.5vw;
-        padding-right: 2.5vw;
-    }
-}
-
+/* Tablets */
 @media (max-width: 48em) {
     body {
         font-size: 2vw !important; /* Scale text with window size */
@@ -109,9 +95,14 @@ Media queries must appear at end of CSS to overwrite defaults
     }
 }
 
+/* Mobile */
 @media (max-width: 30em) {
     body {
         font-size: 3vw !important; /* Force menu wrap */
+    }
+    header, main { /* Shrink to avoid mobile screen notch. */
+        padding-left: 3vw;
+        padding-right: 3vw;
     }
     .heading {
         font-size: 110% !important;
