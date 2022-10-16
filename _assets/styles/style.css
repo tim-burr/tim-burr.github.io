@@ -9,7 +9,7 @@ Global styles
 }
 
 :root {
-    /* Color palette */
+    /* Light mode color palette */
     --white: #FFF;
     --gray: #CCC;
     --blue: #245;
@@ -18,6 +18,9 @@ Global styles
     --green: #4AB989;
     --lt-green: #9BDC7B;
     --yellow: #F9F871;
+
+    /* Dark mode color palette */
+    
 }
 
 /*
