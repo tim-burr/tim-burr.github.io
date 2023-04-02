@@ -15,12 +15,7 @@ paths:
   build: '_site'
   pages: '_pages'
   templates: '_templates'
-
-# Required: Relative paths (from templates subdirectory)
-templates:
-  default: 'default.html'
-  header: 'modules\header.html'
-  footer: 'modules\footer.html'
+  modules: '_templates\modules'
 
 # Optional: Relative paths (from root)
 # Note: The full contents of these subdirectories are copied into the build directory
@@ -28,11 +23,18 @@ includes:
   - '_assets'
   - '_data'
 
+# Optional: Default value used if page front matter does not specify
+defaults:
+  title: 'Timbur: Projects, Tips & Tricks.'
+  description: 'The portfolio of Tim Burroughs.'
+  category: 'about'
+  template: 'default'
+
 # Optional: Global user-defined tags to populate in custom templates
-# Format is '{tag}': 'value'
+# Format is tag: 'value'
 tokens:
-  '{media}': 'media'
-  '{styles}': 'styles'
+  media: 'media'
+  styles: 'styles'
 
 # Required:
 # true = formatted HTML outputs
