@@ -3,7 +3,7 @@
 ####################
 
 # Required: Absolute path to website source directory
-root: 'D:\Bloomy Projects\Git\Timbur.Tech\tim-burr.github.io'
+root: 'C:\Users\timothyb\SynologyDrive\Projects\GitHub\Timbur.Tech\tim-burr.github.io'
 
 # Optional: Root domain
 domain: 'timbur.tech'
