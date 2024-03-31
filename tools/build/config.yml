@@ -8,7 +8,7 @@ root: 'C:\Users\timothyb\SynologyDrive\Projects\GitHub\Timbur.Tech\tim-burr.gith
 # Optional: Root domain
 domain: 'timbur.tech'
 # Required: Name of website homepage without file extension
-homepage: 'about'
+homepage: 'home'
 
 # Required: Relative paths (from root)
 paths:
@@ -27,7 +27,7 @@ includes:
 defaults:
   title: 'Timbur: Projects, Tips & Tricks.'
   description: 'The portfolio of Tim Burroughs.'
-  category: 'about'
+  category: 'articles'
   template: 'default'
 
 # Optional: Global user-defined tags to populate in custom templates
