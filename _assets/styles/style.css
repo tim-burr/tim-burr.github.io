@@ -85,7 +85,7 @@ img {
     height: auto;
 }
 
-#maintenance-main {
+#content-main {
     z-index: 1;
     height: 100%;
     flex-flow: column nowrap;
@@ -95,7 +95,7 @@ img {
     letter-spacing: normal;
 }
 
-#maintenance-main h1 {
+#content-main h1 {
     margin: 0;
     text-transform: uppercase;
 }
