@@ -28,20 +28,15 @@ Normal styles
 */
 
 body {
+    background-color: var(--white);
+    font-size: 1rem;
+
+    /* Container properties */
     display: flex;
     flex-flow: column nowrap;
+    align-items: stretch;
     width: 100vw; /* Ignore scrollbar */
     height: 100vh; /* Ignore scrollbar */
-    font-size: 1rem;
-}
-
-header, main, footer {
-    width: 100%;
-    height: auto;
-}
-
-header, main {
-    background-color: var(--white);
 }
 
 header {
@@ -49,7 +44,6 @@ header {
     top: 0;
     position: sticky; /* Only works if top is defined */
     flex: 0 0 auto; /* No shrink */
-    text-transform: uppercase;
     font-size: 140%;
 }
 
@@ -58,27 +52,30 @@ header .menu-container {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+    align-items: stretch;
 }
 
 main {
     z-index: 50;
-    flex: 1 0 auto; /* Grow to fill page */
-    align-items: flex-start;
     font-size: 85%;
+
+    /* Container properties */
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+
+    /* Item properties */
+    flex: 1 0 auto; /* Grow to fill page */
 }
 
 footer {
+    z-index: 50;
     flex: 0 0 auto; /* No shrink */
     background-color: var(--blue);
     color: var(--gray);
     text-align: center;
-    text-transform: uppercase;
     font-size: 80%;
     padding: 1em;
-}
-
-h1 {
-    text-transform: uppercase;
 }
 
 img {
@@ -86,22 +83,56 @@ img {
 }
 
 #content-main {
-    z-index: 1;
-    height: 100%;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-content: center;
     text-align: center;
     letter-spacing: normal;
+
+    /* Container properties */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: stretch;
+
+    /* Item properties */
+    flex: 1 0 auto;
 }
 
-#content-main h1 {
-    margin: 0;
-    text-transform: uppercase;
+#portrait {
+    /* Container properties */
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    /* Item properties */
+    flex: 1 0 auto;
 }
 
 #maintenance-icon {
     max-width: 12vw;
+}
+
+#contact {
+    /* Container properties */
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    /* Item properties */
+    flex: 1 0 auto;
+}
+
+#contact-links {
+    display: inline-flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+#img-traces {
+    flex: 1 0 auto;
 }
 
 /*
