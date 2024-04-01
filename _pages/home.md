@@ -1,8 +1,8 @@
 ---
 title: default
 description: default
-category: default
-template: default
+category: home
+template: home
 ---
 
 # Website being fabricated
